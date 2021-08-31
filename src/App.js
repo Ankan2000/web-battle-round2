@@ -3,6 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import "./App.css";
 
+const messages = [
+  "HELP ME! \n Start the timer and watch me hatch!",
+  "PLEASE WAIT! I'm trying to get out. In the meanwhile you can do your work.",
+];
+
 const App = () => {
   const [time, setTime] = useState({
     hours: 0,
@@ -60,7 +65,8 @@ const App = () => {
   useEffect(() => {
     const decrementFunction = () => {
       if (seconds === 0 && minutes === 0 && hours === 0) {
-        return playSound();
+        playSound();
+        alert("Time's up!");
         return resetTimer();
       }
 
@@ -124,12 +130,15 @@ const App = () => {
           <div className="time-controllers">
             <button onClick={startTimer}>
               <FontAwesomeIcon icon={faPlay} />
+              <span className="tooltip">Start Timer</span>
             </button>
             <button onClick={stopTimer}>
               <FontAwesomeIcon icon={faPause} />
+              <span className="tooltip">Pause Timer</span>
             </button>
             <button onClick={resetTimer}>
               <FontAwesomeIcon icon={faUndo} />
+              <span className="tooltip">Reset Timer</span>
             </button>
           </div>
           <svg className="progress-ring" width="300" height="300">
@@ -146,15 +155,22 @@ const App = () => {
             />
           </svg>
         </div>
+        <div className="text-message">
+          Click on the Numbers to set the timer <br />
+          To know more hover over buttons or the egg!
+        </div>
       </div>
       <div className="vertical-divider"></div>
       <div className="egg-container">
         <img
+          className={!start && "egg"}
+          id="egg"
           src={process.env.PUBLIC_URL + `/egg${imageNumber}.png`}
           alt="egg"
           width={imageNumber === 4 ? "270" : "150"}
           height="260"
         />
+        <p className="bubble">{start ? messages[1] : messages[0]}</p>
       </div>
     </>
   );
