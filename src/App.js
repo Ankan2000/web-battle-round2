@@ -1,4 +1,9 @@
-import { faPause, faPlay, faUndo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPause,
+  faPlay,
+  faTimes,
+  faUndo,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import "./App.css";
@@ -6,6 +11,7 @@ import "./App.css";
 const messages = [
   "HELP ME! \n Start the timer and watch me hatch!",
   "PLEASE WAIT! I'm trying to get out. In the meanwhile you can do your work.",
+  "THANKS! without you I would never have lived ever!",
 ];
 
 const App = () => {
@@ -16,6 +22,7 @@ const App = () => {
   });
   const [totalTime, setTotalTime] = useState(0);
   const [start, setStart] = useState(false);
+  const [end, setEnd] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const { hours, minutes, seconds } = time;
@@ -60,14 +67,14 @@ const App = () => {
     setTime({ ...time, hours: 0, minutes: 0, seconds: 0 });
     setCircleOffset(0);
     setImageNumber(1);
+    setEnd(false);
   };
 
   useEffect(() => {
     const decrementFunction = () => {
       if (seconds === 0 && minutes === 0 && hours === 0) {
-        playSound();
-        alert("Time's up!");
-        return resetTimer();
+        setEnd(true);
+        return playSound();
       }
 
       let sec = seconds - 1;
@@ -99,6 +106,9 @@ const App = () => {
 
   return (
     <>
+      <div className="message-phone">
+        Use a Laptop or a Desktop for BEST EXPERIENCE
+      </div>
       <div className="container">
         <div className="time-container">
           <div className="time-wrapper">
@@ -170,7 +180,18 @@ const App = () => {
           width={imageNumber === 4 ? "270" : "150"}
           height="260"
         />
-        <p className="bubble">{start ? messages[1] : messages[0]}</p>
+        <p className="bubble">
+          {start ? (end ? messages[2] : messages[1]) : messages[0]}
+        </p>
+      </div>
+      <div
+        className="snackbar"
+        style={{ visibility: end ? "visible" : "hidden" }}
+      >
+        Time has ended and the Chicken is free now!
+        <button className="close-btn" onClick={resetTimer}>
+          start again
+        </button>
       </div>
     </>
   );

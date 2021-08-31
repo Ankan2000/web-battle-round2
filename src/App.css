@@ -218,6 +218,46 @@ button:hover .tooltip {
   visibility: visible;
 }
 
+.snackbar {
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 100;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+}
+
+.close-btn {
+  padding: 8px 16px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #f44336;
+}
+
+.close-btn:hover {
+  background-color: #da190b;
+}
+
+.message-phone {
+  width: 350px;
+  padding: 8px 16px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  border-left: 4px solid #555;
+  padding-left: 4px;
+  background-color: #ececec;
+  display: none;
+}
+
 @media only screen and (max-width: 700px) {
   .container {
     width: 100vw;
@@ -227,5 +267,8 @@ button:hover .tooltip {
   }
   .egg-container {
     display: none;
+  }
+  .message-phone {
+    display: block;
   }
 }
