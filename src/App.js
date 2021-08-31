@@ -19,8 +19,18 @@ const App = () => {
 
   const [circleOffset, setCircleOffset] = useState(0);
 
+  const [imageNumber, setImageNumber] = useState(1);
+
   const setProgress = (percent) => {
     setCircleOffset(circumference - (percent / 100) * circumference);
+    if (percent < 66.67) setImageNumber(2);
+    if (percent < 33.34) setImageNumber(3);
+    if (percent === 0) setImageNumber(4);
+  };
+
+  const playSound = () => {
+    const sound = new Audio(process.env.PUBLIC_URL + "/bell.mp3");
+    sound.play();
   };
 
   const handleInput = (name) => (event) => {
@@ -32,7 +42,7 @@ const App = () => {
   const startTimer = () => {
     setStart(true);
     setDisabled(true);
-    setTotalTime(hours * 24 + minutes * 60 + seconds);
+    setTotalTime(hours * 3600 + minutes * 60 + seconds);
   };
 
   const stopTimer = () => {
@@ -44,12 +54,13 @@ const App = () => {
     stopTimer();
     setTime({ ...time, hours: 0, minutes: 0, seconds: 0 });
     setCircleOffset(0);
+    setImageNumber(1);
   };
 
   useEffect(() => {
     const decrementFunction = () => {
       if (seconds === 0 && minutes === 0 && hours === 0) {
-        alert("Time's UP!");
+        return playSound();
         return resetTimer();
       }
 
@@ -57,13 +68,11 @@ const App = () => {
       let min = sec < 0 ? minutes - 1 : minutes;
       let hr = min < 0 ? hours - 1 : hours;
 
-      if (sec < 0) sec = 60;
+      if (sec < 0) sec = 59;
 
-      if (min < 0) min = 60;
+      if (min < 0) min = 59;
 
-      if (hr < 0) hr = 24;
-
-      const elapsedTime = hr * 24 + min * 60 + sec;
+      const elapsedTime = hr * 3600 + min * 60 + sec;
       setProgress((elapsedTime / totalTime) * 100);
 
       setTime({ ...time, hours: hr, minutes: min, seconds: sec });
@@ -83,60 +92,71 @@ const App = () => {
   });
 
   return (
-    <div className="container">
-      <div className="time-container">
-        <div className="time-wrapper">
-          <input
-            type="text"
-            id="hours"
-            value={hours}
-            onChange={handleInput("hours")}
-            disabled={disabled}
-          />
-          <span className="time-label">H</span>
-          <input
-            type="text"
-            id="minutes"
-            value={minutes}
-            onChange={handleInput("minutes")}
-            disabled={disabled}
-          />
-          <span className="time-label">M</span>
-          <input
-            type="text"
-            id="seconds"
-            value={seconds}
-            onChange={handleInput("seconds")}
-            disabled={disabled}
-          />
-          <span className="time-label">S</span>
+    <>
+      <div className="container">
+        <div className="time-container">
+          <div className="time-wrapper">
+            <input
+              type="text"
+              id="hours"
+              value={hours}
+              onChange={handleInput("hours")}
+              disabled={disabled}
+            />
+            <span className="time-label">H</span>
+            <input
+              type="text"
+              id="minutes"
+              value={minutes}
+              onChange={handleInput("minutes")}
+              disabled={disabled}
+            />
+            <span className="time-label">M</span>
+            <input
+              type="text"
+              id="seconds"
+              value={seconds}
+              onChange={handleInput("seconds")}
+              disabled={disabled}
+            />
+            <span className="time-label">S</span>
+          </div>
+          <div className="time-controllers">
+            <button onClick={startTimer}>
+              <FontAwesomeIcon icon={faPlay} />
+            </button>
+            <button onClick={stopTimer}>
+              <FontAwesomeIcon icon={faPause} />
+            </button>
+            <button onClick={resetTimer}>
+              <FontAwesomeIcon icon={faUndo} />
+            </button>
+          </div>
+          <svg className="progress-ring" width="300" height="300">
+            <circle
+              className="progress-ring__circle"
+              stroke="black"
+              strokeWidth="4"
+              fill="transparent"
+              r="142"
+              cx="150"
+              cy="150"
+              strokeDasharray={`${circumference} ${circumference}`}
+              strokeDashoffset={circleOffset}
+            />
+          </svg>
         </div>
-        <div className="time-controllers">
-          <button onClick={startTimer}>
-            <FontAwesomeIcon icon={faPlay} />
-          </button>
-          <button onClick={stopTimer}>
-            <FontAwesomeIcon icon={faPause} />
-          </button>
-          <button onClick={resetTimer}>
-            <FontAwesomeIcon icon={faUndo} />
-          </button>
-        </div>
-        <svg className="progress-ring" width="300" height="300">
-          <circle
-            className="progress-ring__circle"
-            stroke="black"
-            strokeWidth="4"
-            fill="transparent"
-            r="142"
-            cx="150"
-            cy="150"
-            strokeDasharray={`${circumference} ${circumference}`}
-            strokeDashoffset={circleOffset}
-          />
-        </svg>
       </div>
-    </div>
+      <div className="vertical-divider"></div>
+      <div className="egg-container">
+        <img
+          src={process.env.PUBLIC_URL + `/egg${imageNumber}.png`}
+          alt="egg"
+          width={imageNumber === 4 ? "270" : "150"}
+          height="260"
+        />
+      </div>
+    </>
   );
 };
 
