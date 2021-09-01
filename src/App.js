@@ -1,23 +1,18 @@
-import {
-  faPause,
-  faPlay,
-  faTimes,
-  faUndo,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPause, faPlay, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import "./App.css";
 
 const messages = [
   "HELP ME! \n Start the timer and watch me hatch!",
-  "PLEASE WAIT! I'm trying to get out. In the meanwhile you can do your work.",
-  "THANKS! without you I would never have lived ever!",
+  "PLEASE WAIT! I'm trying to get out. In the meanwhile, you can do your work.",
+  "THANKS! without you I would have never been alive!",
 ];
 
 const App = () => {
   const [time, setTime] = useState({
     hours: 0,
-    minutes: 25,
+    minutes: 0,
     seconds: 0,
   });
   const [totalTime, setTotalTime] = useState(0);
@@ -167,7 +162,7 @@ const App = () => {
         </div>
         <div className="text-message">
           Click on the Numbers to set the timer <br />
-          To know more hover over buttons or the egg!
+          To know more - hover over the buttons or the egg!
         </div>
       </div>
       <div className="vertical-divider"></div>
