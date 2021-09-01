@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/web-battle-round2/static/css/main.08fafc2f.chunk.css",
-    "main.js": "/web-battle-round2/static/js/main.d09600e3.chunk.js",
-    "main.js.map": "/web-battle-round2/static/js/main.d09600e3.chunk.js.map",
+    "main.css": "/web-battle-round2/static/css/main.a5831ae7.chunk.css",
+    "main.js": "/web-battle-round2/static/js/main.5a535d89.chunk.js",
+    "main.js.map": "/web-battle-round2/static/js/main.5a535d89.chunk.js.map",
     "runtime-main.js": "/web-battle-round2/static/js/runtime-main.dbec5bb6.js",
     "runtime-main.js.map": "/web-battle-round2/static/js/runtime-main.dbec5bb6.js.map",
     "static/js/2.bd1142e2.chunk.js": "/web-battle-round2/static/js/2.bd1142e2.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.731ec25a.chunk.js": "/web-battle-round2/static/js/3.731ec25a.chunk.js",
     "static/js/3.731ec25a.chunk.js.map": "/web-battle-round2/static/js/3.731ec25a.chunk.js.map",
     "index.html": "/web-battle-round2/index.html",
-    "static/css/main.08fafc2f.chunk.css.map": "/web-battle-round2/static/css/main.08fafc2f.chunk.css.map",
+    "static/css/main.a5831ae7.chunk.css.map": "/web-battle-round2/static/css/main.a5831ae7.chunk.css.map",
     "static/js/2.bd1142e2.chunk.js.LICENSE.txt": "/web-battle-round2/static/js/2.bd1142e2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.dbec5bb6.js",
     "static/js/2.bd1142e2.chunk.js",
-    "static/css/main.08fafc2f.chunk.css",
-    "static/js/main.d09600e3.chunk.js"
+    "static/css/main.a5831ae7.chunk.css",
+    "static/js/main.5a535d89.chunk.js"
   ]
 }
